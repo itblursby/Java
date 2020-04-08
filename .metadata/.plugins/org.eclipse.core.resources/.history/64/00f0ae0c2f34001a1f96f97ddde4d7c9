@@ -1,0 +1,27 @@
+import java.util.*;
+import java.io.*;
+public class MilkFactory {
+
+	public static void main(String[] args) throws Exception {
+		Scanner s = new Scanner(new File("factory.in"));
+		PrintWriter p = new PrintWriter("factory.out");
+		ArrayList[] tree = new ArrayList[s.nextInt()];
+		for (int i = 0; i < tree.length;i++) {
+			tree[i] = new ArrayList<Integer>(0);
+		}
+		
+		
+		while(s.hasNext()) {
+			int s1 = s.nextInt()-1;
+			int s2 = s.nextInt()-1;
+			System.out.println(s1);
+			System.out.println(s2);
+			tree[s1].add(0);
+		}
+		
+		s.close();
+		p.close();
+
+	}
+
+}

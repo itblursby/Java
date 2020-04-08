@@ -1,0 +1,14 @@
+package randomlist;
+import java.util.*;
+public class random {
+	static Random r = new Random();
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		for (int a = 0; a < 10; a++) {
+			System.out.println(randint(0,2));
+		}
+	}
+	static int randint(int a, int b) {
+		return a + (int)Math.floor(r.nextDouble()*(b-a));
+	}
+}

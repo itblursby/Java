@@ -1,0 +1,10 @@
+import java.util.ArrayList;
+
+public class MilkFactory {
+
+	public static void main(String[] args) {
+		ArrayList[] tree = new ArrayList[100];
+
+	}
+
+}

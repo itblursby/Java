@@ -1,0 +1,24 @@
+package randomlist;
+import java.util.*;
+public class random {
+	static Random r = new Random();
+	public static void main(String[] args) {
+		int number =  12;
+		int[] numbers = new int[number];
+		// TODO Auto-generated method stub
+		List<Integer> numbers2 = new ArrayList<Integer>();
+		for (int i = 0; i < number; i++) {
+			numbers2.add(i);
+		}
+		for (int i = 0; i < number; i++) {
+			int s = randint(0,number-i);
+			numbers[i] = numbers2.get(s);
+			numbers2.remove(s);
+			
+		}
+		System.out.println(numbers);
+	}
+	static int randint(int a, int b) {
+		return a + (int)Math.floor(r.nextDouble()*(b-a));
+	}
+}

@@ -1,0 +1,14 @@
+import java.util.*;
+import java.io.*;
+public class FencePlan {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		Scanner s = new Scanner(new File("fenceplan.in"));
+		PrintWriter p = new PrintWriter("fenceplan.out");
+			
+		s.close();
+		p.close();
+	}
+
+}

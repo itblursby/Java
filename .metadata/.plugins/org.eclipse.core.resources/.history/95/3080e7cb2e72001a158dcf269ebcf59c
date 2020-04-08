@@ -1,0 +1,120 @@
+import java.io.*;
+import java.util.*;
+public class CowLifeguards {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		Scanner s = new Scanner(new File("lifeguards.in"));
+		PrintWriter p = new PrintWriter("lifeguards.out");
+		int N = s.nextInt();
+		lgEvent[] queue = new lgEvent[N*2];
+		for (int i = 0; i < N; i++) {
+			queue[i*2] = new lgEvent(i, s.nextInt(), false);
+			queue[i*2+1] = new lgEvent(i, s.nextInt(), true);
+		}
+		
+		Arrays.sort(queue);
+		System.out.println(Arrays.toString(queue));
+		
+		//calculate time that pool is only covered by a particular cow.
+		ArrayList<Integer> active = new ArrayList<Integer>(0);
+		int total = 0;
+		
+		int last = 0; //last time no cows were on duty
+		int[] cover1 = new int[N];
+		for (int e = 0; e < N*2; e++) {
+//			System.out.println("---------------");
+//			System.out.println(last);
+//			
+//			System.out.println(queue[e]);
+//			System.out.println(active + " are covering in " + last + " to " + queue[e].getPos());
+			if (active.size() == 0) {
+				
+			} else {
+				total += queue[e].getPos() - last;
+				if (active.size() == 1) {
+					int cow = active.get(0);
+					cover1[cow] = cover1[cow] + queue[e].getPos() - last;
+				}
+			}
+			
+			if (queue[e].isClose()) {
+				
+				active.remove(new Integer(queue[e].getID()));
+
+				//System.out.println(active);
+			
+			} else {
+				
+				active.add(queue[e].getID());
+				
+				//System.out.println(active);
+				
+			}
+			
+			last = queue[e].getPos();
+			
+			
+			
+		}
+//		System.out.println("total is " + total);
+//		System.out.println(Arrays.toString(cover1));
+		int min = 10000;
+		for (int i =  0; i < N; i++) {
+			if (cover1[i] < min) {
+				min = cover1[i];
+			}
+		}
+//		System.out.println(min);
+//		System.out.println(total - min);
+		p.print(total - min);
+		s.close();
+		p.close();
+		
+		
+	}
+
+}
+class lgEvent implements Comparable{
+	int pos;
+	boolean close;
+	int ID;
+	lgEvent(int ID_, int pos_, boolean close_){
+		pos = pos_;
+		close = close_;
+		ID = ID_;
+	}
+	int getPos() {
+		return pos;
+	}
+	boolean isClose() {
+		return close;
+	}
+	int getID() {
+		return ID;
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		lgEvent s = (lgEvent) o;
+		return this.pos - s.pos;
+	}
+	public boolean equals(Object o) {
+		lgEvent s = (lgEvent) o;
+		if (ID == s.ID) {
+			if (pos == s.pos) {
+				if (close == s.close) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	@Override
+	public String toString() {
+		if (close) {
+			return "Cow " + ID + " stops at " + pos;
+		}
+		return "Cow " + ID + " starts at " + pos;
+	}
+}

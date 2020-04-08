@@ -1,0 +1,49 @@
+import java.io.*;
+import java.util.*;
+public class CowLifeguards {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		Scanner s = new Scanner(new File("lifeguards.in"));
+		PrintWriter p = new PrintWriter("lifeguards.out");
+		int N = s.nextInt();
+		lgEvent[] queue = new lgEvent[N*2];
+		for (int i = 0; i < N*2; i++) {
+			queue[i] = new lgEvent(s.nextInt(),)
+			
+		}
+		s.close();
+		p.close();
+		
+		
+	}
+
+}
+class lgEvent implements Comparable{
+	int pos;
+	boolean close;
+	int ID;
+	lgEvent(int ID_, int pos_, boolean close_){
+		pos = pos_;
+		close = close_;
+		ID = ID_;
+	}
+	int getPos() {
+		return pos;
+	}
+	boolean isClose() {
+		return close;
+	}
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		lgEvent s = (lgEvent) o;
+		return this.pos - s.pos;
+	}
+	public String toString() {
+		if (close) {
+			return "Cow " + ID + " stops at " + pos;
+		}
+		return "Cow " + ID + " starts at " + pos;
+	}
+}
