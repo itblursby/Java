@@ -1,2 +1,2 @@
 # Java
- java stuff i made
+Things in Java I wrote for fun or for USACO.
