@@ -3,36 +3,57 @@ import kareltherobot.*;
 
 public class CircleRobot implements Directions{
 	public static void main(String[] args) {
-		final int radius = Integer.parseInt(JOptionPane.showInputDialog("Enter radius of circle:"));
-		World.setSize((radius << 1)+1, (radius << 1)+1);
-		World.setDelay(1);
+		//final int radius = Integer.parseInt(JOptionPane.showInputDialog("Enter radius of circle:"));
+		World.setSize(80,80);
+		World.setDelay(0);
 		World.setVisible(true);
-		Robot ribbot = new Robot(1,radius+1, North, Integer.MAX_VALUE);
-		circle(ribbot,radius);
-		for (int i = 0; i < radius; i++) {
-			ribbot.move();
-		}
+		Robot ribbot = new Robot(21,35, North, Integer.MAX_VALUE);
+		ellipse(ribbot,20,20);
+		move(ribbot,20,26);
+		ellipse(ribbot,12,12);
+		move(ribbot,-40,0);
+		ellipse(ribbot,12,12);
+		move(ribbot,20,-26);
+		
+		move(ribbot,4,4);
+		ellipse(ribbot,3,7);
+		move(ribbot,0,-3);
+		ellipse(ribbot,2,4);
+		move(ribbot,-8,3);
+		ellipse(ribbot,3,7);
+		move(ribbot,0,-3);
+		ellipse(ribbot,2,4);
+		move(ribbot,4,-9);
+		ellipse(ribbot,5,2);
+
+//		ellipse(ribbot,3,7);
+
+
 	}
-	static void circle(Robot rob, int rad) {
+	static void ellipse(Robot rob, int xrad, int yrad) {
 		int initx = 0;
-		int inity = -rad;
+		int inity = -yrad;
 		int x = 0;
-		int y = -rad;
+		int y = -yrad;
+		rob.turnLeft();
+		rob.turnLeft();
+		for (int i = 0; i < yrad; i++) {
+			rob.move();
+		}
+		rob.turnLeft();
+		rob.turnLeft();
 		do {
-			//finds the best move to do by choosing the one that
-			//is closest to the border of the circle
-			//and is also counterclockwise around the circle
 			int xmove = -2;
 			int ymove = -2;
-			int distance = Integer.MAX_VALUE;
+			float distance = Float.MAX_VALUE;
 			for (int xinc = -1; xinc < 2; xinc++) {
 				for (int yinc = -1; yinc < 2; yinc++) {
 					if (xinc!=0||yinc!=0) {//checks if not empty
 						if (y*(x+xinc)-x*(y+yinc)<0) { //checks if counterclockwise
-							if (Math.abs(distsq(x+xinc,y+yinc) - rad*rad) < distance) {
+							if (Math.abs(distsq((x+xinc)/(float)xrad,(y+yinc)/(float)yrad) - 1) < distance) {
 								xmove = xinc;
 								ymove = yinc;
-								distance = Math.abs(distsq(x+xinc,y+yinc) - rad*rad);
+								distance = Math.abs(distsq((x+xinc)/(float)xrad,(y+yinc)/(float)yrad) - 1);
 							}
 						}
 					}
@@ -43,8 +64,11 @@ public class CircleRobot implements Directions{
 			move(rob,xmove,ymove);
 			rob.putBeeper();
 		} while (initx != x || inity != y);
+		for (int i = 0; i < yrad; i++) {
+			rob.move();
+		}
 	}
-	static int distsq(int x1, int y1) { //distance to origin squared
+	static float distsq(float x1, float y1) { //distance to origin squared
 		return x1*x1+y1*y1;
 	}
 	static void move(Robot roomba, int x, int y) { //assume Robot is pointed north
