@@ -1,3 +1,4 @@
+//http://www.usaco.org/index.php?page=viewproblem2&cpid=855
 import java.io.*;
 import java.util.*;
 
@@ -18,11 +19,9 @@ public class MilkMix {
 		}
 		bucketA.pour(bucketB);
 		PrintWriter p = new PrintWriter("mixmilk.out");
-
 		p.println(bucketA.getAmount());
 		p.println(bucketB.getAmount());
 		p.println(bucketC.getAmount());
-
 		p.close();
 
 	}
@@ -30,9 +29,13 @@ public class MilkMix {
 class Bucket{
 	private int capacity;
 	private int amount;
+	private static int bucketID = 0;
+	private int ID;
 	Bucket (int cap, int am){
 		capacity = cap;
 		amount = am;
+		ID = bucketID;
+		bucketID++;
 	}
 	public int getCapacity() {
 		return capacity;
@@ -57,7 +60,7 @@ class Bucket{
 		amount += val;
 		//returns overflow of milk
 	}
-	void pour(Bucket other) {
+	public void pour(Bucket other) {
 		
 		if (other.getEmpty() > this.amount) {
 			other.increment(amount);
