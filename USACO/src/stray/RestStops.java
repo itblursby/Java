@@ -1,5 +1,5 @@
 //http://www.usaco.org/index.php?page=viewproblem2&cpid=810
-package stray;
+//package stray;
 import java.util.*;
 import java.io.*;
 public class RestStops {
@@ -24,10 +24,10 @@ public class RestStops {
 //			}
 //		});
 		System.out.println(Arrays.deepToString(stops));
-		int maxtasty = 0;
-		int besttaste = stops[stops.length-1][1];
+		long maxtasty = 0;
+		long besttaste = stops[stops.length-1][1];
 		for (int i = stops.length-1; i >= 0; i--) {
-			int adv;
+			long adv;
 			if (i == 0) {
 				adv = stops[i][0];
 			}else {
